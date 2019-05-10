@@ -1,21 +1,37 @@
 package main
 
 import (
+	"API1/config"
 	"API1/router"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 	"log"
 	"net/http"
 	"time"
-	"github.com/spf13/pflag"
 )
 
+var (
+	cfg = pflag.StringP("config","c","","apiserver config file path")
+)
+
+
+
 func main()  {
+	pflag.Parse()
+
+	err := config.Init(*cfg)
+	if err != nil{
+		panic(err)
+	}
+
+	gin.SetMode(viper.GetString("runmode"))
 	g := gin.New()
 
 	router.Load(g)
 
-	g.Run()
+	http.ListenAndServe(viper.GetString("port"),g)
 
 	go check()
 }
@@ -32,8 +48,8 @@ func check(){
 
 
 func pingServer() (error){
-	for i:=0; i<2; i++ {
-		resp,error := http.Get("http://127.0.0.1:8080"+"/v1/health")
+	for i:=0; i<viper.GetInt("max_ping_count"); i++ {
+		resp,error := http.Get(viper.GetString("url") + "/v1/health")
 		if error == nil && resp.StatusCode == 200{
 			return nil
 		}
