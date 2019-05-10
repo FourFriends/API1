@@ -4,10 +4,10 @@ import (
 	"API1/config"
 	"API1/router"
 	"github.com/gin-gonic/gin"
+	"github.com/lexkong/log"
 	"github.com/pkg/errors"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-	"log"
 	"net/http"
 	"time"
 )
@@ -31,9 +31,13 @@ func main()  {
 
 	router.Load(g)
 
+
+
 	http.ListenAndServe(viper.GetString("port"),g)
 
 	go check()
+
+	log.Infof("Start to listening the incoming requests on http address: %s", viper.GetString("addr"))
 }
 
 //自检程序
@@ -41,9 +45,9 @@ func main()  {
 func check(){
 	err :=pingServer()
 	if err != nil{
-		log.Fatal("The router has no response")
+		log.Fatal("The router has no response, or it might took too long to start up.", err)
 	}
-	log.Println("The router has been deployed successfully.")
+	log.Info("The router has been deployed successfully.")
 }
 
 
@@ -53,7 +57,7 @@ func pingServer() (error){
 		if error == nil && resp.StatusCode == 200{
 			return nil
 		}
-		log.Println("waiting for the router,retry in 1 second")
+		log.Info("Waiting for the router, retry in 1 second.")
 		time.Sleep(time.Second)
 	}
 	return errors.New("Cannot connect to the router.")
