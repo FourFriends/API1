@@ -13,16 +13,17 @@ import (
 )
 
 var (
-	cfg = pflag.StringP("config","c","","apiserver config file path")
+	cfg = pflag.StringP("config", "c", "", "apiserver config file path")
 )
 
+func main() {
+	//不能在这里初始化log，因为log在这里还没有初始化
+	//log.Info("App Start!")
 
-
-func main()  {
 	pflag.Parse()
 
 	err := config.Init(*cfg)
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 
@@ -31,30 +32,30 @@ func main()  {
 
 	router.Load(g)
 
+	log.Infof("Start to listening the incoming requests on http address: %s", viper.GetString("port"))
 
-
-	http.ListenAndServe(viper.GetString("port"),g)
-
+	//先进入检测，然后再调用主进程
 	go check()
 
-	log.Infof("Start to listening the incoming requests on http address: %s", viper.GetString("addr"))
+	http.ListenAndServe(viper.GetString("port"), g)
+
 }
 
 //自检程序
 
-func check(){
-	err :=pingServer()
-	if err != nil{
+func check() {
+	log.Info("Enter The router ")
+	err := pingServer()
+	if err != nil {
 		log.Fatal("The router has no response, or it might took too long to start up.", err)
 	}
-	log.Info("The router has been deployed successfully.")
+	log.Info("The router has been deployed successfully,Leave The router")
 }
 
-
-func pingServer() (error){
-	for i:=0; i<viper.GetInt("max_ping_count"); i++ {
-		resp,error := http.Get(viper.GetString("url") + "/v1/health")
-		if error == nil && resp.StatusCode == 200{
+func pingServer() error {
+	for i := 0; i < viper.GetInt("max_ping_count"); i++ {
+		resp, error := http.Get(viper.GetString("url") + "/v1/health")
+		if error == nil && resp.StatusCode == 200 {
 			return nil
 		}
 		log.Info("Waiting for the router, retry in 1 second.")
