@@ -2,6 +2,7 @@ package main
 
 import (
 	"API1/config"
+	"API1/model"
 	"API1/router"
 	"github.com/gin-gonic/gin"
 	"github.com/lexkong/log"
@@ -22,10 +23,15 @@ func main() {
 
 	pflag.Parse()
 
+	//初始化设置yaml
 	err := config.Init(*cfg)
 	if err != nil {
 		panic(err)
 	}
+
+	//初始化db
+	model.DB.Init()
+	defer model.DB.Close()
 
 	gin.SetMode(viper.GetString("runmode"))
 	g := gin.New()
