@@ -1,0 +1,62 @@
+GET http://127.0.0.1:8080/v1/ram
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T110028.200.txt
+
+###
+
+GET http://127.0.0.1:8080/v1/health
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T110015.200.txt
+
+###
+
+GET 127.0.0.1:8080/v1/health
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8080/v1/health
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T105920.400.html
+
+###
+
+GET http://localhost:8080/v1/health
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T105830.400.html
+
+###
+
+GET http://localhost:8080/v1/ram
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T105802.400.html
+
+###
+
+GET http://localhost:8080/v1/ram
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T105736.400.html
+
+###
+
+GET http://localhost:8080/v1/ram
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-13T105704.400.html
+
+###
+

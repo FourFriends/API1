@@ -1,11 +1,11 @@
 runmode: debug
-port: :8090
+port: :8080
 name: apiserver
-url: http://127.0.0.1:8090
+url: http://127.0.0.1:8080
 max_ping_count: 10
 log:
   writers: file,stdout
-  logger_level: Debug
+  logger_level: DEBUG
   logger_file: log/apiserver.log
   log_format_text: false
   rollingPolicy: size

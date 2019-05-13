@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+    <TITLE>´íÎó£ºÄúËùÇëÇóµÄÍøÖ·£¨URL£©ÎÞ·¨»ñÈ¡</TITLE>
+    <STYLE type="text/css"><!--
+        BODY {
+            background-color: #ffffff;
+            font-family: verdana, sans-serif
+        }
+
+        PRE {
+            font-family: sans-serif
+        }
+
+        --></STYLE>
+</HEAD>
+<BODY>
+<H1>´íÎó</H1>
+<H2>ÄúËùÇëÇóµÄÍøÖ·£¨URL£©ÎÞ·¨»ñÈ¡</H2>
+<HR noshade size="1px">
+<P>
+    µ±³¢ÊÔ½øÐÐÒÔÏÂÇëÇóÊ±£º
+<PRE>
+GET /v1/ram HTTP/1.1
+Accept: */*
+Host: localhost:8080
+User-Agent: Apache-HttpClient/4.5.6 (Java/1.8.0_202-release)
+Accept-Encoding: gzip,deflate
+Cache-Control: no-cache, max-age=259200
+Connection: keep-alive
+
+
+</PRE>
+<P>
+    ·¢ÉúÁËÏÂÁÐµÄ´íÎó£º
+<UL>
+    <LI>
+        <STRONG>
+            Invalid Request
+            <BR>
+            ÎÞÐ§µÄÇëÇó
+        </STRONG>
+</UL>
+
+<P>
+    Some aspect of the HTTP Request is invalid. Possible problems:
+    <BR>
+    HTTP ÇëÇóµÄÄ³Ð©·½ÃæÊÇÎÞÐ§µÄ¡£¿ÉÄÜÊÇÏÂÁÐÎÊÌâ£º
+<UL>
+    <LI>Missing or unknown request method
+        <BR>È±ÉÙÇëÇó·½Ê½»òÎ´ÖªµÄÇëÇó·½Ê½
+    <LI>Missing URL
+        <BR>È±ÉÙÍøÖ·
+    <LI>Missing HTTP Identifier (HTTP/1.0)
+        <BR>È±ÉÙ HTTP ±êÊ¶£¨HTTP/1.0£©
+    <LI>Request is too large
+        <BR>ÇëÇóÃüÁî¹ý³¤
+    <LI>Content-Length missing for POST or PUT requests
+        <BR>POST »ò PUT ÇëÇóÈ±ÉÙÄÚÈÝ³¤¶È
+    <LI>Illegal character in hostname; underscores are not allowed
+        <BR>Ö÷»úÃû³ÆÖÐ°üº¬²»ºÏ·¨µÄ×Ö·û£»ÏÂ»®ÏßÊÇ²»ÔÊÐíµÄ¡£
+</UL>
+</P>
+<P>±¾»º´æ·þÎñÆ÷¹ÜÀíÔ±£º<A HREF="mailto:SK-SQUIDWEB-78">SK-SQUIDWEB-78</A>.
+</BODY>
+</HTML>
